@@ -1,0 +1,14 @@
+name: boot
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          $job = Start-Job -Name "Job1" -ScriptBlock {Do {"pause"} Until ($False)}
+          Start-Sleep -s 10
+          Stop-Job $job
