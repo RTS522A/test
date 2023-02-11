@@ -10,4 +10,4 @@ jobs:
       - name: Build
         run: |
           diskpart /s scriptname.txt
-          dir .
+          dir %TEMP%
