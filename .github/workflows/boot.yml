@@ -28,6 +28,7 @@ jobs:
 
       - name: Split phase2
         run: |
+          Import-Module .\Split-File.ps1
           Remove-Item –path .\splitted1 –recurse
           New-Item -Path ".\" -Name "splitted2" -ItemType "directory"
           Split-File -InputFile "wmilb.esd" -OutputDirectory ".\splitted2" -Verbose -ChunkSize 4096 -ChunkTotal 2 -ChunkSkip 2
