@@ -44,6 +44,7 @@ jobs:
               Write-Host $duration: $result
             }
             if('Running' -ne $job.JobStateInfo.State) {
+              $elapsedTime.Stop()
               $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
               Write-Host $duration: "JOB DONE"
               break
