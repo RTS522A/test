@@ -1,4 +1,4 @@
-name: timeouts
+name: seed
 on:
   workflow_dispatch:
 
