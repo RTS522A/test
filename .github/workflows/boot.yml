@@ -9,7 +9,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
-          Dism /Capture-Image /ImageFile:"boot.wim" /CaptureDir:"\\?\Volume{241f04df-0000-0000-0000-100000000000}\" /Name:boot /Compress:max
+          vssadmin.exe create shadow /for=\\?\Volume{241f04df-0000-0000-0000-100000000000}\
+          Dism /Capture-Image /ImageFile:"boot.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" /Name:boot /Compress:max
       - uses: actions/upload-artifact@v3
         with:
           path: boot.wim
