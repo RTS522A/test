@@ -18,7 +18,7 @@ f.close()
 #Seed torrent
 ses = lt.session({'listen_interfaces': '0.0.0.0:6881'})
 
-h = ses.add_torrent({'ti': lt.torrent_info('mytorrent.torrent'), 'save_path': '.', 'seed_mode': True}) 
+h = ses.add_torrent({'ti': lt.torrent_info('mytorrent.torrent'), 'save_path': '.'}) 
 print("Total size: ") + str(h.status().total_wanted)
 print("Name: ") + h.name()   
 while True:
