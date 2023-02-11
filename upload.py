@@ -35,7 +35,7 @@ h = ses.add_torrent({'ti': info, 'save_path': '.'})
 s = h.status()
 print('starting', s.name)
 
-while (true):
+while (True):
     s = h.status()
 
     print('\r%.2f%% complete (down: %.1f kB/s up: %.1f kB/s peers: %d) %s' % (
