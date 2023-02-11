@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
-          $job = Start-Job -Name "Job1" -ScriptBlock {Do {"pause"} Until ($False)}
-          Start-Sleep -s 10
+          $job = Start-Job -Name "Job1" -ScriptBlock {Do {"timeout /t 10; echo done"} Until ($False)}
+          Start-Sleep -s 20
+          echo ha
           Stop-Job $job
