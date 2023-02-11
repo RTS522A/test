@@ -47,6 +47,7 @@ while (True):
     print('\r%.2f%% complete (down: %.1f kB/s up: %.1f kB/s peers: %d) %s' % (
         s.progress * 100, s.download_rate / 1000, s.upload_rate / 1000,
         s.num_peers, s.state), end=' ')
+    print()
 
 #    alerts = ses.pop_alerts()
 #    for a in alerts:
