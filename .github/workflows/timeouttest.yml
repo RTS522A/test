@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
+          $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
           $MyScript = {
               $i = 0
               while ($true) {
@@ -27,7 +28,8 @@ jobs:
             param ([System.Object]$sender, [System.Timers.ElapsedEventArgs]$e)
             ($sender -as [System.Timers.Timer]).Stop()
             Unregister-Event -SourceIdentifier $JobGUID
-            Write-Host "Job $JobGUID removed by force as it exceeded timeout!"
+            $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
+            Write-Host $duration: "Job $JobGUID removed by force as it exceeded timeout!"
             Get-Job -Name $JobGUID | Remove-Job -Force
           }
           $timer = New-Object System.Timers.Timer -ArgumentList 3000 #just change the timeout here
@@ -35,12 +37,15 @@ jobs:
           $timer.Start()
           $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
           while ($true) {
-            Write-Host $job.JobStateInfo.State
+            $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
+            Write-Host $duration: $job.JobStateInfo.State
             if ($result = $job | Receive-Job ) {
-              Write-Host $result
+              $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
+              Write-Host $duration: $result
             }
             if('Running' -ne $job.JobStateInfo.State) {
-              Write-Host "JOB DONE"
+              $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
+              Write-Host $duration: "JOB DONE"
               break
             }
             Start-Sleep -Milliseconds 500
