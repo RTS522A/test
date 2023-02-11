@@ -9,7 +9,22 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
-          $job = Start-Job -Name "Job1" -ScriptBlock {Do {"timeout /t 10; echo done"} Until ($False)}
-          Start-Sleep -s 20
-          echo ha
-          Stop-Job $job
+          $MyScript = {
+              Get-WmiObject -ComputerName MyComputer -Class win32_operatingsystem
+          }
+
+          $JobGUID = [system.Guid]::NewGuid()
+
+          $elapsedEventHandler = {
+            param ([System.Object]$sender, [System.Timers.ElapsedEventArgs]$e)
+            ($sender -as [System.Timers.Timer]).Stop()
+            Unregister-Event -SourceIdentifier $JobGUID
+            Write-Host "Job $JobGUID removed by force as it exceeded timeout!"
+            Get-Job -Name $JobGUID | Remove-Job -Force
+          }
+
+          $timer = New-Object System.Timers.Timer -ArgumentList 3000 #just change the timeout here
+          Register-ObjectEvent -InputObject $timer -EventName Elapsed -Action $elapsedEventHandler -SourceIdentifier $JobGUID
+          $timer.Start()
+
+          Start-Job -ScriptBlock $MyScript -Name $JobGUID
