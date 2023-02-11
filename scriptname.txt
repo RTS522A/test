@@ -1,5 +1,4 @@
 list volume
 list disk
-select disk 0
-select par 0
+select vol 0
 assign letter s
