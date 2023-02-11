@@ -34,7 +34,6 @@ jobs:
           while ($true) {
             
             $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
-            Write-Host $duration ":" $job.JobStateInfo.State
             if ($result = $job | Receive-Job ) {
               $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
               Write-Host $duration ":" $result
@@ -45,7 +44,7 @@ jobs:
               Write-Host $duration ": JOB DONE"
               break
             }
-            Start-Sleep -s 50
+            Start-Sleep -s 5
           }
           
       - uses: actions/upload-artifact@v3
