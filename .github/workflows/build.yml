@@ -12,5 +12,5 @@ jobs:
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
           \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
-          Dism /Capture-Image /ImageFile:"git.wim" /CaptureDir:\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1 /Name:github
+          Dism /Capture-Image /ImageFile:"git.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1" /Name:github
           dir git.wim
