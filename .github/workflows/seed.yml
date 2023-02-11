@@ -10,6 +10,7 @@ jobs:
       - name: Build
         run: |
           pip install libtorrent
+          Get-ChildItem -Path Env:
 
           $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
           $MyScript = {
@@ -31,7 +32,7 @@ jobs:
           $timer.Start()
           $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
           while ($true) {
-            Get-ChildItem -Path Env:
+            
             $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
             Write-Host $duration ":" $job.JobStateInfo.State
             if ($result = $job | Receive-Job ) {
