@@ -1,4 +1,4 @@
-name: boot
+name: timeouts
 on:
   workflow_dispatch:
 
