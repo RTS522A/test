@@ -14,7 +14,7 @@ t.add_node("router.utorrent.com", 6881)
 t.add_node("dht.transmissionbt.com", 6881)
 lt.set_piece_hashes(t, workingPath)
 torrent = t.generate()
-f = open(1.torrent", "wb")
+f = open("1.torrent", "wb")
 f.write(lt.bencode(torrent))
 f.close()
 
