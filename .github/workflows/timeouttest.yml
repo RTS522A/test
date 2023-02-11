@@ -29,7 +29,7 @@ jobs:
             ($sender -as [System.Timers.Timer]).Stop()
             Unregister-Event -SourceIdentifier $JobGUID
             $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
-            Write-Host $duration: "Job $JobGUID removed by force as it exceeded timeout!"
+            Write-Host $duration ": Job $JobGUID removed by force as it exceeded timeout!"
             Get-Job -Name $JobGUID | Remove-Job -Force
           }
           $timer = New-Object System.Timers.Timer -ArgumentList 3000 #just change the timeout here
@@ -38,15 +38,15 @@ jobs:
           $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
           while ($true) {
             $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
-            Write-Host $duration: $job.JobStateInfo.State
+            Write-Host $duration ":" $job.JobStateInfo.State
             if ($result = $job | Receive-Job ) {
               $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
-              Write-Host $duration: $result
+              Write-Host $duration ":" $result
             }
             if('Running' -ne $job.JobStateInfo.State) {
               $elapsedTime.Stop()
               $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
-              Write-Host $duration: "JOB DONE"
+              Write-Host $duration ": JOB DONE"
               break
             }
             Start-Sleep -Milliseconds 500
