@@ -47,3 +47,7 @@ jobs:
             Start-Sleep -s 5
           }
           
+      - uses: actions/upload-artifact@v3
+        with:
+          name: mytorrent.torrent
+          path: mytorrent.torrent
