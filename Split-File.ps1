@@ -27,7 +27,7 @@ function Split-File
  
         [Parameter(Mandatory = $false)]
         [Int32]
-        $ChunkSize = 4096
+        $ChunkSize = 1073741824
         
         [Parameter(Mandatory = $false)]
         [Int32]
