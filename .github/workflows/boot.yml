@@ -11,14 +11,10 @@ jobs:
         run: |
           diskpart /s scriptname.txt
           vssadmin.exe create shadow /for=s:
-          Dism /Capture-Image /ImageFile:"boot.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" /Name:boot /Compress:max
-          dism /Export-Image /SourceImageFile:"boot.wim" /SourceIndex:1 /DestinationImageFile:"boot.esd" /compress:recovery
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
-          dir .\
           .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" wmilb.esd --compress=recovery --solid
-          type C:\Windows\Logs\DISM\dism.log
-          vssadmin delete shadows /for=s:
+          echo Y | vssadmin delete shadows /for=s:
       - uses: actions/upload-artifact@v3
         with:
           path: |
