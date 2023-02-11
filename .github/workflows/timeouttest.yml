@@ -29,6 +29,7 @@ jobs:
           $timer.Start()
           $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
           while ($true) {
+            Write-Host $job.JobStateInfo.State
             break
           }
           
