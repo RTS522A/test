@@ -8,4 +8,6 @@ jobs:
       steps:
       - uses: actions/checkout@v2
       - name: Build
-        run: wmic cpu get /value
+        run: |
+          wmic cpu get /value
+          vssadmin.exe create shadow /for=c:
