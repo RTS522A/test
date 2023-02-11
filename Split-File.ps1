@@ -27,11 +27,11 @@ function Split-File
  
         [Parameter(Mandatory = $false)]
         [Int32]
-        $ChunkSize = 1073741824
+        $ChunkSize = 1073741824,
         
         [Parameter(Mandatory = $false)]
         [Int32]
-        $ChunkSkip = 0
+        $ChunkSkip = 0,
         
         [Parameter(Mandatory = $false)]
         [Int32]
