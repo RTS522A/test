@@ -56,6 +56,6 @@ while (True):
 
     sys.stdout.flush()
 
-    time.sleep(10)
+    time.sleep(60)
 
 print(h.status().name, 'complete')
