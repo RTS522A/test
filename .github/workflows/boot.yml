@@ -11,9 +11,9 @@ jobs:
         run: |
           diskpart /s scriptname.txt
           vssadmin.exe create shadow /for=s:
-          Dism /Capture-Image /ImageFile:"boot.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" /Name:boot /Compress:recovery
-          dism /?
+          Dism /Capture-Image /ImageFile:"boot.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" /Name:boot /Compress:max
+          dism /Export-Image /SourceImageFile:"boot.wim" /SourceIndex:1 /DestinationImageFile:"boot.esd" /compress:recovery
           type C:\Windows\Logs\DISM\dism.log
       - uses: actions/upload-artifact@v3
         with:
-          path: boot.wim
+          path: boot.esd
