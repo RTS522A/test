@@ -13,7 +13,7 @@ jobs:
           vssadmin.exe create shadow /for=s:
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
-          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" wmilb.esd --compress=recovery --solid
+          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" wmilb.esd --solid
           vssadmin delete shadows /all /quiet
       - uses: actions/upload-artifact@v3
         with:
