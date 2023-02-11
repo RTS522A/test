@@ -25,8 +25,8 @@ s = lt.session()
 s.listen_on(PORT_RANGE[0],PORT_RANGE[1])
 s.add_dht_router('router.utorrent.com',6881)
 s.start_dht()
-print "DHT start: ", s.is_dht_running()
-print "DHT state: ", s.dht_state()
+print("DHT start: ", s.is_dht_running())
+print("DHT state: ", s.dht_state())
 
 
 params = {
