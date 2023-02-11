@@ -11,6 +11,9 @@ jobs:
         run: |
           $MyScript = {
               $i = 0
+              while ($true) {
+               break
+              }
               Get-WmiObject -ComputerName MyComputer -Class win32_operatingsystem
           }
           $JobGUID = [system.Guid]::NewGuid()
