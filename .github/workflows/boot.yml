@@ -17,6 +17,4 @@ jobs:
           echo Y | vssadmin delete shadows /for=s:
       - uses: actions/upload-artifact@v3
         with:
-          path: |
-            boot.esd
-            wmilb.esd
+          path: wmilb.esd
