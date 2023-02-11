@@ -1,0 +1,13 @@
+name: disk
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          diskpart /s scriptname.txt
+          dir .
