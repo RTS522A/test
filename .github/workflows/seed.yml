@@ -10,7 +10,7 @@ jobs:
       - name: Build
         run: |
           pip install libtorrent
-          Get-ChildItem -Path Env:
+          Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
 
           $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
           $MyScript = {
