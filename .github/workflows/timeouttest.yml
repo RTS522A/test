@@ -33,6 +33,10 @@ jobs:
             if ($result = $job | Receive-Job ) {
               Write-Host $result
             }
-            break
+            if('Running' -ne $job.JobStateInfo.State) {
+              Write-Host "JOB DONE"
+              break
+            }
+            Start-Sleep -Milliseconds 500
           }
           
