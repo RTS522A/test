@@ -27,4 +27,18 @@ jobs:
           Register-ObjectEvent -InputObject $timer -EventName Elapsed -Action $elapsedEventHandler -SourceIdentifier $JobGUID
           $timer.Start()
 
-          Start-Job -ScriptBlock $MyScript -Name $JobGUID
+          $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
+
+          while ($true) {
+            Write-Host $job.JobStateInfo.State
+	          if ($result = $job | Receive-Job )
+            {
+	            Write-Host $result
+	          }
+	          if('Running' -ne $job.JobStateInfo.State) {
+              Write-Host "JOB DONE"
+              break
+            }
+	          Start-Sleep -Milliseconds 500
+	
+          }
