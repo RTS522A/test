@@ -32,6 +32,10 @@ function Split-File
         [Parameter(Mandatory = $false)]
         [Int32]
         $ChunkSkip = 0
+        
+        [Parameter(Mandatory = $false)]
+        [Int32]
+        $ChunkTotal = 0
     )
  
     Begin
@@ -64,6 +68,9 @@ function Split-File
           }   
  
           $ChunkNumber += 1
+          if ($ChunkNumber -gt $ChuckSkip+$ChuckSkip) {
+           break
+          }
             
         }
     }
