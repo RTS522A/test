@@ -18,16 +18,25 @@ f.close()
 #Seed torrent
 ses = lt.session({'listen_interfaces': '0.0.0.0:6881'})
 
-h = ses.add_torrent({'ti': lt.torrent_info('mytorrent.torrent'), 'save_path': '.'}) 
-print("Total size: ") + str(h.status().total_wanted)
-print("Name: ") + h.name()   
-while True:
-    s = h.status()
-    state_str = ['queued', 'checking', 'downloading metadata', \
-      'downloading', 'finished', 'seeding', 'allocating', 'checking fastresume']
+info = lt.torrent_info("mytorrent.torrent")
+h = ses.add_torrent({'ti': info, 'save_path': '.'})
+s = h.status()
+print('starting', s.name)
 
-    print('\r%.2f%% complete (down: %.1f kb/s up: %.1f kB/s peers: %d) %s' % \
-      (s.progress * 100, s.download_rate / 1000, s.upload_rate / 1000, s.num_peers, state_str[s.state]))
+while (not s.is_seeding):
+    s = h.status()
+
+    print('\r%.2f%% complete (down: %.1f kB/s up: %.1f kB/s peers: %d) %s' % (
+        s.progress * 100, s.download_rate / 1000, s.upload_rate / 1000,
+        s.num_peers, s.state), end=' ')
+
+    alerts = ses.pop_alerts()
+    for a in alerts:
+        if a.category() & lt.alert.category_t.error_notification:
+            print(a)
+
     sys.stdout.flush()
 
     time.sleep(1)
+
+print(h.status().name, 'complete')
