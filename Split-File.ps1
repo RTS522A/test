@@ -68,7 +68,7 @@ function Split-File
           }   
  
           $ChunkNumber += 1
-          if ($ChunkNumber -gt $ChuckSkip+$ChuckSkip) {
+          if ($ChunkNumber -gt $ChuckSkip+$ChuckTotal) {
            break
           }
             
