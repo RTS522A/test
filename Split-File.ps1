@@ -57,7 +57,7 @@ function Split-File
  
         While ($BytesRead = $FileStream.Read($ByteChunks, 0, $ChunkSize))
         {
-          if ($ChunkNumber -gt $ChuckSkip) {
+          if ($ChunkNumber gt $ChuckSkip) {
             $OutputFile = Join-Path -Path $OutputDirectory -ChildPath "$OutputFilePrefix$ChunkNumber"
             $OutputStream = [System.IO.File]::OpenWrite($OutputFile)
             $OutputStream.Write($ByteChunks, 0, $BytesRead)
@@ -68,7 +68,8 @@ function Split-File
           }   
  
           $ChunkNumber += 1
-          if ($ChunkNumber -gt $ChuckSkip+$ChuckTotal) {
+          
+          if ($ChunkNumber gt $ChuckSkip+$ChuckTotal) {
            break
           }
             
