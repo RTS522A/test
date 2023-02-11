@@ -4,7 +4,7 @@ import libtorrent as lt
 
 #Create torrent
 fs = lt.file_storage()
-lt.add_files(fs, "./test.txt")
+lt.add_files(fs, "./wimlib.zip")
 t = lt.create_torrent(fs)
 t.add_tracker("http://denis.stalker.h3q.com:6969/announce\n")
 t.add_tracker("udp://tracker.leechers-paradise.org:6969\n")
