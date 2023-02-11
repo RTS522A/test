@@ -12,9 +12,15 @@ jobs:
           $MyScript = {
               $i = 0
               while ($true) {
-               break
+                echo DOING JOB $i
+                Start-Sleep -s 10
+                $i++
+                if ($i -ge 3) {
+                  break
+                }
+                
               }
-              Get-WmiObject -ComputerName MyComputer -Class win32_operatingsystem
+              
           }
           $JobGUID = [system.Guid]::NewGuid()
           $elapsedEventHandler = {
