@@ -10,6 +10,7 @@ jobs:
       - name: Build
         run: |
           pip install libtorrent
+          python upload.py
           $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
           $MyScript = {
             python upload.py
