@@ -1,0 +1,18 @@
+name: BUILD WIM
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          wmic cpu get /value
+          vssadmin.exe create shadow /for=c:
+          Dism /Capture-Image /ImageFile:"c:\temp\git.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" /Name:github /Compress:max
+          dir c:\temp\git.wim
+      - uses: actions/upload-artifact@v3
+        with:
+          path: c:\temp\git.wim
