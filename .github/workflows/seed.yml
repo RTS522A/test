@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
+          pip install libtorrent
           $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
           $MyScript = {
             python upload.py
