@@ -47,3 +47,4 @@ while True:
     print(msg % (s.progress * 100, s.download_rate / 1000, s.upload_rate / 1000, s.num_peers, s.state))
     sys.stdout.flush()
     time.sleep(1)
+    exit() 
