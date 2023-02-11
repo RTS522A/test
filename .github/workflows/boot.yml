@@ -20,14 +20,15 @@ jobs:
         run: |
           Import-Module .\Split-File.ps1
           New-Item -Path ".\" -Name "splitted" -ItemType "directory"
-          Split-File -InputFile "wmilb.esd" -OutputDirectory ".\splitted" -Verbose -ChunkSize 4096 -ChunkTotal 2
+          Split-File -InputFile "wmilb.esd" -OutputDirectory ".\splitted1" -Verbose -ChunkSize 4096 -ChunkTotal 2
       - uses: actions/upload-artifact@v3
         with:
           name: my-artifact1
-          path: splitted
+          path: splitted1
 
       - name: Split phase2
         run: |
+          Remove-Item –path .\splitted1 –recurse
           New-Item -Path ".\" -Name "splitted2" -ItemType "directory"
           Split-File -InputFile "wmilb.esd" -OutputDirectory ".\splitted2" -Verbose -ChunkSize 4096 -ChunkTotal 2 -ChunkSkip 2
       - uses: actions/upload-artifact@v3
