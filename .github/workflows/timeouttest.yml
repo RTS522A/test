@@ -10,6 +10,7 @@ jobs:
       - name: Build
         run: |
           $MyScript = {
+              $i = 0
               Get-WmiObject -ComputerName MyComputer -Class win32_operatingsystem
           }
           $JobGUID = [system.Guid]::NewGuid()
