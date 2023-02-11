@@ -27,4 +27,4 @@ jobs:
           $timer = New-Object System.Timers.Timer -ArgumentList 3000 #just change the timeout here
           Register-ObjectEvent -InputObject $timer -EventName Elapsed -Action $elapsedEventHandler -SourceIdentifier $JobGUID
           $timer.Start()
-          Start-Job -ScriptBlock $MyScript -Name $JobGUID
+          $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
