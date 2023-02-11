@@ -30,6 +30,9 @@ jobs:
           $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
           while ($true) {
             Write-Host $job.JobStateInfo.State
+            if ($result = $job | Receive-Job ) {
+              Write-Host $result
+            }
             break
           }
           
