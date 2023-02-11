@@ -1,0 +1,41 @@
+name: timeouts
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
+          $MyScript = {
+              $i = 0
+              while ($true) {
+                echo DOING JOB $i
+                Start-Sleep -s 10
+                $i++
+                if ($i -ge 3) {
+                  break
+                }
+                
+              }
+              
+          }
+          $JobGUID = [system.Guid]::NewGuid()
+          $elapsedEventHandler = {
+            param ([System.Object]$sender, [System.Timers.ElapsedEventArgs]$e)
+            ($sender -as [System.Timers.Timer]).Stop()
+            Unregister-Event -SourceIdentifier $JobGUID
+            $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
+            Write-Host $duration ": Job $JobGUID removed by force as it exceeded timeout!"
+            Get-Job -Name $JobGUID | Remove-Job -Force
+          }
+          $timer = New-Object System.Timers.Timer -ArgumentList 30000 #just change the timeout here
+          Register-ObjectEvent -InputObject $timer -EventName Elapsed -Action $elapsedEventHandler -SourceIdentifier $JobGUID
+          $timer.Start()
+          $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
+          
+      - name: checkJob
+        run: Get-Job
