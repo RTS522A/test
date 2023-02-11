@@ -31,7 +31,6 @@ jobs:
           $timer.Start()
           $job = Start-Job -ScriptBlock $MyScript -Name $JobGUID
           while ($true) {
-            Get-Job
             $duration = $elapsedTime.Elapsed.ToString("hh\:mm\:ss")
             Write-Host $duration ":" $job.JobStateInfo.State
             if ($result = $job | Receive-Job ) {
