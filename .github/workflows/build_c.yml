@@ -40,13 +40,13 @@ jobs:
           echo "${{ env.fixed_name }}"
           echo "${{ inputs.name }}"
         
-      - name: capture_full
+      - name: update source-list.txt
         shell: cmd
         if: github.event.inputs.filesonly == 'A'
-        run: wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\\" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=lzms
+        run: echo "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\\" "\${{ inputs.name }}" > source-list.txt
+         
 
-      - name: capture_only_files
-        if: github.event.inputs.filesonly != 'A'
+      - name: capture
         shell: cmd
         run: wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=lzms
 
