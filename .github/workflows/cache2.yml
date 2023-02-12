@@ -28,12 +28,12 @@ jobs:
       needs: store
       steps:
       - name: Restore
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+        uses: actions/cache@v2
         with:
          path: "c:\\temp\\git.wim"
          key: test-cache-single-path
-          
+      
+      - uses: actions/checkout@v2
       - name: Split phase1-4
         run: |
           Import-Module .\Split-File.ps1
