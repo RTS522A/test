@@ -6,7 +6,10 @@ on:
       name:
         description: Name of directory
         required: false
-        default: Windows
+      recursive:
+        description: resurcive directory
+        required: false
+        default: Yes
 
 jobs:
   test:
@@ -18,19 +21,20 @@ jobs:
         run: |
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
-          source-list.cmd "C:\${{ inputs.name }}" full >source-list.txt
+          source-list.cmd "C:\${{ inputs.name }}" ${{ inputs.recursive }} >source-list.txt
           
       - name: Download and Extract wimlib
         run: |
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
+          "fixed_name=${{ inputs.name }}" -replace '\\', '_' | | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
       - name: capture
         shell: cmd
         run: |          
-          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ inputs.name }}.wim" 
+          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" 
           vssadmin delete shadows /all /quiet
-          dir "c:\temp\win_${{ inputs.name }}.wim"
+          dir "c:\temp\win_${{ env.fixed_name }}.wim"
       - uses: actions/upload-artifact@v3
         with:
-          name: "win_${{ inputs.name }}.wim"
-          path: c:\temp\win_${{ inputs.name }}.wim
+          name: "win_${{ env.fixed_name }}.wim"
+          path: c:\temp\win_${{ env.fixed_name }}.wim
