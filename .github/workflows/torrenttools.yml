@@ -1,0 +1,14 @@
+name: torrenttools
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        run: |
+          Invoke-WebRequest -Uri 'https://github.com/fbdtemme/torrenttools/releases/download/v0.6.2/torrenttools-0.6.2-windows-x86_64.msi' ' -OutFile torrenttools"
+          msiexec /a .\torrenttools.msi /qb TARGETDIR=.\
+          .\torrenttools.exe --help
