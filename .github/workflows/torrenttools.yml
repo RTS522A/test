@@ -18,13 +18,13 @@ jobs:
           @chcp 65001>nul        
           mkdir D:\a\test\test\bbb\
           msiexec /a D:\a\test\test\torrenttools.msi /qb TARGETDIR=D:\a\test\test\bbb\
-          D:\a\test\test\bbb\torrenttools\torrenttools.exe 
+ 
 
-      - name: unpack
+      - name: create torrent
         shell: cmd
         run: |
           @chcp 65001>nul  
-          torrenttools create -v "1" -o wimlib.torrent" -c "by torrent-webseed-creator" -l "auto" -s "torrent-webseed-creator" "wimlib.zip"
+          D:\a\test\test\bbb\torrenttools\torrenttools.exe  create -v "1" -o wimlib.torrent" -c "by torrent-webseed-creator" -l "auto" -s "torrent-webseed-creator" "wimlib.zip"
           
       - name: Upload torrent file
         uses: actions/upload-artifact@v3
