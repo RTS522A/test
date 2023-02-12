@@ -7,11 +7,21 @@ jobs:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v2
-      - name: Build
+      - name: Create
         run: |
-          pip install libtorrent
+          pip nstall py3createtorrent
           Invoke-WebRequest -Uri 'https://download.mozilla.org/?product=firefox-esr-next-latest-ssl&os=win&lang=en-US' -OutFile wimlib.zip
-
+          py3createtorrent -p "0" -c "by torrent-webseed-creator" -s "torrent-webseed-creator" -o "wimlib.torrent" "wimlib.zip"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: wimlib.torrent
+          path: wimlib.torrent
+          
+          
+      - name: Seed
+        run: |
+          pip install libtorrent 
+          
           $elapsedTime = [system.diagnostics.stopwatch]::StartNew()
           $MyScript = {
             python upload.py
