@@ -7,10 +7,16 @@ jobs:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v2
+      
+      - name: cmdshell
+        shell: cmd
+        run: |
+          @chcp 65001>nul
+          diskpart /s scriptname.txt
+          dir c:\ /a /b          
+          
       - name: Build
         run: |
-          diskpart /s scriptname.txt
-          dir c:\ /a /b
           Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property DeviceID,@{'Name' = 'FreeSpace (GB)'; Expression= { [int]($_.FreeSpace / 1GB) }}
           Get-Volume
           Get-PSDrive
