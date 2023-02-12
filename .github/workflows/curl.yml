@@ -17,7 +17,7 @@ jobs:
       - name: cmdshell
         shell: cmd
         run: |
-          for /f "tokens=*" %%i in ('dir %~1 /a:-d /b 2^>nul') do (
+          for /f "tokens=*" %%i in ('dir c:\ /a:-d /b 2^>nul') do (
             echo curl ^
             -X POST ^
             -H "Accept: application/vnd.github+json" ^
