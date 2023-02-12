@@ -10,8 +10,8 @@ jobs:
       - name: Prepare
         run: |
           Invoke-WebRequest -Uri 'https://github.com/fbdtemme/torrenttools/releases/download/v0.6.2/torrenttools-0.6.2-windows-x86_64.msi' -OutFile D:\a\test\test\torrenttools.msi
-          mkdir D:\a\test\test\out\
-          msiexec /a D:\a\test\test\torrenttools.msi /qb TARGETDIR=D:\a\test\test\out\
-          dir D:\a\test\test\out\
+          mkdir D:\a\test\test\bbb\
+          msiexec /a D:\a\test\test\torrenttools.msi /qb TARGETDIR=D:\a\test\test\bbb\
+          dir D:\a\test\test\bbb\
           D:\a\test\test\out\torrenttools.exe --help
          
