@@ -43,7 +43,7 @@ jobs:
       - name: update source-list.txt
         shell: cmd
         if: github.event.inputs.filesonly == 'A'
-        run: echo "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\\" "\${{ inputs.name }}" > source-list.txt
+        run: echo "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\" "\${{ inputs.name }}" > source-list.txt
          
 
       - name: capture
