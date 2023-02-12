@@ -1,0 +1,13 @@
+name: boot
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        shell: cmd
+        run: dir "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\\" /a
+        
