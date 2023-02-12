@@ -16,6 +16,6 @@ jobs:
           @chcp 65001>nul        
           mkdir D:\a\test\test\bbb\
           msiexec /a D:\a\test\test\torrenttools.msi /qb TARGETDIR=D:\a\test\test\bbb\
-          dir D:\a\test\test\bbb\*
-          D:\a\test\test\bbb\torrenttools.exe --help
+          dir D:\a\test\test\bbb\torrenttools\*
+          D:\a\test\test\bbb\torrenttools\torrenttools.exe --help
          
