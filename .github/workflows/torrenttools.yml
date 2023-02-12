@@ -24,7 +24,7 @@ jobs:
         shell: cmd
         run: |
           @chcp 65001>nul  
-          D:\a\test\test\bbb\torrenttools\torrenttools.exe  create -v "1" -o wimlib.torrent" -c "by torrent-webseed-creator" -l "auto" -s "torrent-webseed-creator" "wimlib.zip"
+          D:\a\test\test\bbb\torrenttools\torrenttools.exe  create -v "1" -o "D:\a\test\test\wimlib.torrent" -c "by torrent-webseed-creator" -l "auto" -s "torrent-webseed-creator" "D:\a\test\test\wimlib.zip"
           
       - name: Upload torrent file
         uses: actions/upload-artifact@v3
