@@ -13,7 +13,7 @@ jobs:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v2
-      - name: cmdshell
+      - name: vss
         shell: cmd
         run: |
           wmic cpu get /value
@@ -25,7 +25,9 @@ jobs:
         run: |
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
-          
+      - name: capture
+        shell: cmd
+        run: |          
           .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\${{ inputs.name }}.wim" 
           vssadmin delete shadows /all /quiet
           dir "c:\temp\${{ inputs.name }}.wim"
