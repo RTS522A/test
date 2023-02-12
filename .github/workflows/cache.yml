@@ -1,0 +1,143 @@
+name: BUILD SPLITTED WIM
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+      - name: Build
+        run: |
+          wmic cpu get /value
+          vssadmin.exe create shadow /for=c:
+          Dism /Capture-Image /ImageFile:"c:\temp\cache_test\git.wim" /CaptureDir:"\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" /Name:github /Compress:max
+          dir c:\temp\cache_test\git.wim
+          vssadmin delete shadows /all /quiet
+          
+      - name: Write cache (Single path)
+        uses: actions/cache@v2
+        with:
+         path: "c:\temp\cache_test\git.wim"
+         key: test-cache-single-path
+      
+      
+ fetch:
+      runs-on: windows-latest
+      needs: store
+      steps:
+      - name: Restore
+        uses: actions/cache@v2
+        with:
+         path: "c:\temp\cache_test\git.wim"
+         key: test-cache-single-path
+          
+      - name: Split phase1-4
+        run: |
+          Import-Module .\Split-File.ps1
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted1" -Verbose -ChunkTotal 4
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact1-4
+          path: splitted1
+          
+      - name: Split phase5-8
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted1 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted2" -Verbose -ChunkTotal 4 -ChunkSkip 4
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact5-8
+          path: splitted2
+          
+      - name: Split phase9-12
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted2 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted3" -Verbose -ChunkTotal 4 -ChunkSkip 8
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact9-12
+          path: splitted3
+          
+      - name: Split phase13-16
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted3 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted4" -Verbose -ChunkTotal 4 -ChunkSkip 12
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact13-16
+          path: splitted4
+          
+      - name: Split phase17-20
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted4 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted5" -Verbose -ChunkTotal 4 -ChunkSkip 16
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact17-20
+          path: splitted5
+          
+      - name: Split phase21-24
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted5 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted6" -Verbose -ChunkTotal 4 -ChunkSkip 20
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact21-24
+          path: splitted6
+          
+      - name: Split phase25-28
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted6 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted7" -Verbose -ChunkTotal 4 -ChunkSkip 24
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact25-28
+          path: splitted7
+          
+      - name: Split phase29-32
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted7 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted8" -Verbose -ChunkTotal 4 -ChunkSkip 28
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact29-32
+          path: splitted8
+          
+      - name: Split phase33-36
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted8 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted9" -Verbose -ChunkTotal 4 -ChunkSkip 32
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact33-36
+          path: splitted9
+          
+      - name: Split phase37-40
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted9 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted10" -Verbose -ChunkTotal 4 -ChunkSkip 36
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact37-40
+          path: splitted10
+          
+      - name: Split phase41-44
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted10 –recurse
+          Split-File -InputFile "c:\temp\git.wim" -OutputDirectory ".\splitted11" -Verbose -ChunkTotal 4 -ChunkSkip 40
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact41-44
+          path: splitted11
