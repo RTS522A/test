@@ -1,4 +1,4 @@
-name: boot
+name: dir
 on:
   workflow_dispatch:
 
