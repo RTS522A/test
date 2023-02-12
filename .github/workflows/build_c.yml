@@ -5,7 +5,7 @@ on:
     inputs:
       name:
         description: Name of directory
-        required: true
+        required: false
         default: Windows
 
 jobs:
@@ -18,20 +18,19 @@ jobs:
         run: |
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
-          source-list.cmd "C:\${{ inputs.name }}\"
+          source-list.cmd "C:\${{ inputs.name }}\" >source-list.txt
           
       - name: Download and Extract wimlib
         run: |
-          dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
       - name: capture
         shell: cmd
         run: |          
-          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\${{ inputs.name }}.wim" 
+          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ inputs.name }}.wim" 
           vssadmin delete shadows /all /quiet
-          dir "c:\temp\${{ inputs.name }}.wim"
+          dir "c:\temp\win_${{ inputs.name }}.wim"
       - uses: actions/upload-artifact@v3
         with:
-          name: "${{ inputs.name }}.wim"
-          path: c:\temp\${{ inputs.name }}.wim
+          name: "win_${{ inputs.name }}.wim"
+          path: c:\temp\win_${{ inputs.name }}.wim
