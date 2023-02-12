@@ -1,5 +1,9 @@
+name: efi
+on:
+  workflow_dispatch:
+
 jobs:
-  test:
+  dump:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v2
@@ -12,7 +16,6 @@ jobs:
           .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" efi.esd --solid
           vssadmin delete shadows /all /quiet
 
-      -
       - uses: actions/upload-artifact@v3
         with:
           name: efi.esd
