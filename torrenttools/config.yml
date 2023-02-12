@@ -1,0 +1,52 @@
+# This is an example configuration file.
+# It should be copied to the suitable directory for your OS and modified there.
+# Linux : $HOME/.config/torrenttools/config.yml
+# Windows : %AppData%/torrenttools/config.yml
+# macOS: $HOME/Library/Application Support/torrenttools
+
+tracker-parameters:
+  AlphaRatio:
+    pid: example_pid
+  BroadcastTheNet:
+    pid: example_pid
+  PassThePopcorn:
+    pid: example_pid
+  TorrentLeech:
+    pid: example_pid
+  UHDBits:
+    pid: example_pid
+
+tracker-groups:
+  # Source: https://github.com/ngosang/trackerslist/blob/master/trackers_best.txt
+  public-trackers:
+    - http://tracker.opentrackr.org:1337/announce
+    - udp://tracker.openbittorrent.com:6969/announce
+    - udp://exodus.desync.com:6969/announce
+    - udp://www.torrent.eu.org:451/announce
+    - udp://wassermann.online:6969/announce
+    - udp://vibe.community:6969/announce
+    - udp://valakas.rollo.dnsabr.com:2710/announce
+    - udp://u.wwwww.wtf:1/announce
+    - udp://tracker0.ufibox.com:6969/announce
+    - udp://tracker.zerobytes.xyz:1337/announce
+    - udp://tracker.zemoj.com:6969/announce
+    - udp://tracker.v6speed.org:6969/announce
+    - udp://tracker.uw0.xyz:6969/announce
+    - udp://tracker.torrent.eu.org:451/announce
+    - udp://tracker.tiny-vps.com:6969/announce
+    - udp://tracker.shkinev.me:6969/announce
+    - udp://tracker.moeking.me:6969/announce
+    - udp://tracker.edkj.club:6969/announce
+    - udp://tracker.dler.org:6969/announce
+    - udp://tracker.blacksparrowmedia.net:6969/announce
+  example-group:
+    - AlphaRatio
+    - TorrentLeech
+
+profiles:
+  public:
+    command: "create"
+    options:
+      announce-group: [ public-trackers ]
+      private: false
+      protocol: 1
