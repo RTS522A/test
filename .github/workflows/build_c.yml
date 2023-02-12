@@ -42,7 +42,7 @@ jobs:
         shell: cmd
         if: github.event.inputs.filesonly == 'A'
         run: |
-          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
+          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
           vssadmin delete shadows /all /quiet
           dir "c:\temp\win_${{ env.fixed_name }}.wim"
 
