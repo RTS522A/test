@@ -6,10 +6,10 @@ on:
       name:
         description: Name of directory
         required: false
-      recursive:
-        description: resurcive directory
+      filesonly:
+        description: filesonly
         required: true
-        default: Yes
+        default: A
 
 jobs:
   test:
@@ -30,7 +30,7 @@ jobs:
           "fixed_name=${{ inputs.name }}" -replace '\\', '_' | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: create source-list.txt
         shell: cmd
-        run: source-list.cmd "C:\${{ inputs.name }}" ${{ inputs.recursive }} > source-list.txt 
+        run: source-list.cmd "C:\${{ inputs.name }}" ${{ inputs.filesonly }} > source-list.txt 
       - name: echo env
         shell: cmd
         run: |
@@ -39,15 +39,15 @@ jobs:
           echo "${{ inputs.name }}"
         
       - name: capture_full
-        if: ${{{{ inputs.recursive }} == "Yes"}}
         shell: cmd
+        if: ${{{{ inputs.filesonly }} == "A"}}
         run: |
           .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
           vssadmin delete shadows /all /quiet
           dir "c:\temp\win_${{ env.fixed_name }}.wim"
 
       - name: capture_only_files
-        if: ${{{{ inputs.recursive }} != "Yes"}}
+        if: ${{{{ inputs.filesonly }} != "A"}}
         shell: cmd
         run: |
           .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
