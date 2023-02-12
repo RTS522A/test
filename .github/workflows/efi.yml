@@ -1,0 +1,19 @@
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          diskpart /s scriptname.txt
+          vssadmin.exe create shadow /for=s:
+          Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
+          Expand-Archive wimlib.zip -DestinationPath .\
+          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\" efi.esd --solid
+          vssadmin delete shadows /all /quiet
+
+      -
+      - uses: actions/upload-artifact@v3
+        with:
+          name: efi.esd
+          path: efi.esd
