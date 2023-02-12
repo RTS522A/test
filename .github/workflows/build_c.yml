@@ -41,7 +41,7 @@ jobs:
       - name: capture_full
         shell: cmd
         if: github.event.inputs.filesonly == 'A'
-        run: wimlib-imagex.exe capture "\\\\?\\GLOBALROOT\\Device\\HarddiskVolumeShadowCopy1\\${{ inputs.name }}\\" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
+        run: wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\\" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
 
       - name: capture_only_files
         if: github.event.inputs.filesonly != 'A'
