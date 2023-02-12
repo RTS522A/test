@@ -13,5 +13,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: dir-list.txt
-          path: dir-list.txt
+          path: c:\temp\dir-list.txt
         
