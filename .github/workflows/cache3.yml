@@ -1,4 +1,4 @@
-name: CACHED SPLITTED WIM2
+name: CACHED SPLITTED WIM3
 on:
   workflow_dispatch:
 
