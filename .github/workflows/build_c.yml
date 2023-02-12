@@ -45,7 +45,13 @@ jobs:
         if: github.event.inputs.filesonly == 'A'
         run: echo "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\" "\${{ inputs.name }}" > source-list.txt
          
-
+      - name: echo env2
+        shell: cmd
+        run: |
+          type source-list.txt
+          echo "${{ env.fixed_name }}"
+          echo "${{ inputs.name }}"
+        
       - name: capture
         shell: cmd
         run: wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=lzms
