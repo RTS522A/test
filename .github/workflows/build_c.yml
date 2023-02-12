@@ -13,17 +13,23 @@ jobs:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v2
-      - name: Build
+      - name: cmdshell
+        shell: cmd
         run: |
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
+          dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
+          source-list.cmd "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\"
+          
+      - name: Download and Extract wimlib
+        run: |
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
-          dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
-          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\" "c:\temp\${{ inputs.name }}.esd" --solid
+          
+          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\${{ inputs.name }}.wim" 
           vssadmin delete shadows /all /quiet
-          dir "c:\temp\${{ inputs.name }}.esd"
+          dir "c:\temp\${{ inputs.name }}.wim"
       - uses: actions/upload-artifact@v3
         with:
-          name: "${{ inputs.name }}.esd"
-          path: c:\temp\${{ inputs.name }}.esd
+          name: "${{ inputs.name }}.wim"
+          path: c:\temp\${{ inputs.name }}.wim
