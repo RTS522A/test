@@ -11,7 +11,7 @@ on:
         required: true
         default: A
 
-run-name: ${{ inputs.name }} || '/'
+run-name: ${{ inputs.name }}
 
 jobs:
   test:
