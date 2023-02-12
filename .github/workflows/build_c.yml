@@ -8,8 +8,8 @@ on:
         required: false
       recursive:
         description: resurcive directory
-        required: false
-        default: Yes
+        required: true
+        default: false
 
 jobs:
   test:
