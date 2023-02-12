@@ -7,12 +7,15 @@ jobs:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v2
-      - name: Prepare
+      - name: Download
+        run: Invoke-WebRequest -Uri 'https://github.com/fbdtemme/torrenttools/releases/download/v0.6.2/torrenttools-0.6.2-windows-x86_64.msi' -OutFile D:\a\test\test\torrenttools.msi
+      
+      - name: unpack
+        shell: cmd
         run: |
-          Invoke-WebRequest -Uri 'https://github.com/fbdtemme/torrenttools/releases/download/v0.6.2/torrenttools-0.6.2-windows-x86_64.msi' -OutFile D:\a\test\test\torrenttools.msi
+          @chcp 65001>nul        
           mkdir D:\a\test\test\bbb\
           msiexec /a D:\a\test\test\torrenttools.msi /qb TARGETDIR=D:\a\test\test\bbb\
           dir D:\a\test\test\bbb\*
-          Get-ChildItem D:\a\test\test\bbb\
           D:\a\test\test\bbb\torrenttools.exe --help
          
