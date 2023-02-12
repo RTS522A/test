@@ -9,9 +9,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Create
         run: |
-          pip nstall py3createtorrent
+          pip install py3createtorrent
           Invoke-WebRequest -Uri 'https://download.mozilla.org/?product=firefox-esr-next-latest-ssl&os=win&lang=en-US' -OutFile wimlib.zip
-          py3createtorrent -p "0" -c "by torrent-webseed-creator" -s "torrent-webseed-creator" -o "wimlib.torrent" "wimlib.zip"
+          python -m py3createtorrent -p "0" -c "by torrent-webseed-creator" -s "torrent-webseed-creator" -o "wimlib.torrent" "wimlib.zip"
       - uses: actions/upload-artifact@v3
         with:
           name: wimlib.torrent
