@@ -14,5 +14,7 @@ jobs:
        
       - name: dir
         shell: cmd
-        run: dir "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\\" /a
+        run: |
+          mklink /d d:\a\temp\temp\vss \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\\
+          dir "d:\a\temp\temp\vss" /a
         
