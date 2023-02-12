@@ -19,6 +19,14 @@ jobs:
           mkdir D:\a\test\test\bbb\
           msiexec /a D:\a\test\test\torrenttools.msi /qb TARGETDIR=D:\a\test\test\bbb\
  
+      - name: Pack
+        run: |
+          Compress-Archive -Path D:\a\test\test\bbb\torrenttools -DestinationPath D:\a\test\test\torrenttools.zip
+      - name: Upload torrent file
+        uses: actions/upload-artifact@v3
+        with:
+          name: torrenttools.zip
+          path: torrenttools.zip          
 
       - name: create torrent
         shell: cmd
