@@ -1,4 +1,4 @@
-name: BUILD SPLITTED WIM
+name: BUILD CACHED SPLITTED WIM
 on:
   workflow_dispatch:
 
