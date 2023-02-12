@@ -11,6 +11,8 @@ on:
         required: true
         default: A
 
+run-name: ${{ ${{ inputs.name }} || '/'}}
+
 jobs:
   test:
       runs-on: windows-latest
