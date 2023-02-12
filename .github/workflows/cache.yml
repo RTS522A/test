@@ -19,18 +19,18 @@ jobs:
       - name: Write cache (Single path)
         uses: actions/cache@v2
         with:
-         path: "c:\temp\cache_test\git.wim"
+         path: "c:\\temp\\cache_test\\git.wim"
          key: test-cache-single-path
       
       
- fetch:
+  fetch:
       runs-on: windows-latest
       needs: store
       steps:
       - name: Restore
         uses: actions/cache@v2
         with:
-         path: "c:\temp\cache_test\git.wim"
+         path: "c:\\temp\\cache_test\\git.wim"
          key: test-cache-single-path
           
       - name: Split phase1-4
