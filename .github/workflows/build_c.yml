@@ -30,7 +30,7 @@ jobs:
           "fixed_name=${{ inputs.name }}" -replace '\\', '_' | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: create source-list.txt
         shell: cmd
-        run: source-list.cmd "C:\${{ inputs.name }}" ${{ inputs.recursive }} 
+        run: source-list.cmd "C:\${{ inputs.name }}" ${{ inputs.recursive }} > source-list.txt 
       - name: echo env
         shell: cmd
         run: |
