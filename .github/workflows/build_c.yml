@@ -18,11 +18,11 @@ jobs:
         run: |
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
-          dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
           source-list.cmd "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\"
           
       - name: Download and Extract wimlib
         run: |
+          dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
       - name: capture
