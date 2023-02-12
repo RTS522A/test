@@ -17,3 +17,7 @@ jobs:
           .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\" c:\temp\git.esd --solid
           vssadmin delete shadows /all /quiet
           dir c:\temp\git.esd
+      - uses: actions/upload-artifact@v3
+        with:
+          name: windows.esd
+          path: c:\temp\git.esd
