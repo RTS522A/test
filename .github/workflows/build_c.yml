@@ -1,4 +1,4 @@
-name: BUILD_C
+name: build_c
 on:
   workflow_dispatch:
 
