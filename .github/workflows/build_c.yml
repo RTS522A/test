@@ -9,7 +9,7 @@ on:
       recursive:
         description: resurcive directory
         required: true
-        default: false
+        default: true
 
 jobs:
   test:
