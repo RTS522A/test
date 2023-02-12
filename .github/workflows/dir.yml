@@ -9,5 +9,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: vss
         shell: cmd
-        run: n.cmd  
+        run: n.cmd 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dir-list.txt
+          path: dir-list.txt
         
