@@ -20,10 +20,10 @@ jobs:
           Invoke-WebRequest -Uri 'https://wimlib.net/downloads/wimlib-1.13.6-windows-x86_64-bin.zip' -OutFile wimlib.zip
           Expand-Archive wimlib.zip -DestinationPath .\
           dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
-          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\" c:\temp\${{ inputs.name }}.esd --solid
+          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\" "c:\temp\${{ inputs.name }}.esd" --solid
           vssadmin delete shadows /all /quiet
-          dir c:\temp\${{ inputs.name }}.esd
+          dir "c:\temp\${{ inputs.name }}.esd"
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ inputs.name }}.esd
+          name: "${{ inputs.name }}.esd"
           path: c:\temp\${{ inputs.name }}.esd
