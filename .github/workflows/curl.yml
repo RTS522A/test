@@ -18,7 +18,7 @@ jobs:
         shell: cmd
         run: |
           for /f "tokens=*" %%i in ('dir c:\ /a:d /b 2^>nul') do (
-            echo curl ^
+            curl ^
             -X POST ^
             -H "Accept: application/vnd.github+json" ^
             -H "Authorization: Bearer ${{ secrets.ACTIONS_KEY }}"^
