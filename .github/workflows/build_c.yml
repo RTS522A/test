@@ -18,7 +18,7 @@ jobs:
         run: |
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
-          source-list.cmd "C:\${{ inputs.name }}\" full >source-list.txt
+          source-list.cmd "C:\${{ inputs.name }}" full >source-list.txt
           
       - name: Download and Extract wimlib
         run: |
