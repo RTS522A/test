@@ -9,7 +9,7 @@ on:
       recursive:
         description: resurcive directory
         required: true
-        default: true
+        default: Yes
 
 jobs:
   test:
@@ -38,13 +38,22 @@ jobs:
           echo "${{ env.fixed_name }}"
           echo "${{ inputs.name }}"
         
-      - name: capture
+      - name: capture_full
+        if: ${{ inputs.recursive == "Yes"}}
         shell: cmd
         run: |
-          
-          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" 
+          .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
           vssadmin delete shadows /all /quiet
           dir "c:\temp\win_${{ env.fixed_name }}.wim"
+
+      - name: capture_only_files
+        if: ${{ inputs.recursive != "Yes"}}
+        shell: cmd
+        run: |
+          .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
+          vssadmin delete shadows /all /quiet
+          dir "c:\temp\win_${{ env.fixed_name }}.wim"
+
       - uses: actions/upload-artifact@v3
         with:
           name: "win_${{ env.fixed_name }}.wim"
