@@ -19,7 +19,7 @@ jobs:
           wmic cpu get /value
           vssadmin.exe create shadow /for=c:
           dir \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\
-          source-list.cmd "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}\"
+          source-list.cmd "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\"
           
       - name: Download and Extract wimlib
         run: |
