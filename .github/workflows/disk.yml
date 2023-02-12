@@ -13,7 +13,7 @@ jobs:
         run: |
           @chcp 65001>nul
           diskpart /s scriptname.txt
-          dir c:\ /a /b          
+          dir c:\ /a          
           
       - name: Build
         run: |
