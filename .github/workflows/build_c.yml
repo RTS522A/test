@@ -39,7 +39,7 @@ jobs:
           echo "${{ inputs.name }}"
         
       - name: capture_full
-        if: ${{ inputs.recursive == "Yes"}}
+        if: ${{${{ inputs.recursive }} == "Yes"}}
         shell: cmd
         run: |
           .\wimlib-imagex.exe capture "\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\${{ inputs.name }}" "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
@@ -47,7 +47,7 @@ jobs:
           dir "c:\temp\win_${{ env.fixed_name }}.wim"
 
       - name: capture_only_files
-        if: ${{ inputs.recursive != "Yes"}}
+        if: ${{${{ inputs.recursive }} != "Yes"}}
         shell: cmd
         run: |
           .\wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=recovery
