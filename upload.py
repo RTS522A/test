@@ -36,7 +36,7 @@ f.close()
 #Seed torrent
 ses = lt.session({'listen_interfaces': '0.0.0.0:6881'})
 
-info = lt.torrent_info("mytorrent.torrent")
+info = lt.torrent_info("wimlib.torrent")
 h = ses.add_torrent({'ti': info, 'save_path': '.'})
 s = h.status()
 print('starting', s.name)
