@@ -9,12 +9,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: vss
         shell: cmd
-        run: |
-          vssadmin.exe create shadow /for=c:  
-       
-      - name: dir
-        shell: cmd
-        run: |
-          mklink /d d:\a\temp\temp\vss \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
-          dir "d:\a\temp\temp\vss" /a
+        run: n.cmd  
         
