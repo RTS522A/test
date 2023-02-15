@@ -11,7 +11,4 @@ jobs:
       - shell: cmd
         run: |
           dir /a
-        
-      - name: Download a single artifact
-      - shell: cmd
-        run: dir /a
+
