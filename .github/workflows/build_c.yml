@@ -54,7 +54,7 @@ jobs:
         
       - name: capture
         shell: cmd
-        run: wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=lzms
+        run: wimlib-imagex.exe capture --source-list source-list.txt "c:\temp\win_${{ env.fixed_name }}.wim" --compress=XPRESS
 
       - name: clean vss
         shell: cmd
