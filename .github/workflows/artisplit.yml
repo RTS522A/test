@@ -12,7 +12,7 @@ jobs:
         run: dir /a
       - name: Download a single artifact
         uses: actions/download-artifact@v3
-         with:
+        with:
           name: win_Program Files.wim
       - shell: cmd
         run: dir /a
