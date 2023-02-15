@@ -1,4 +1,4 @@
-name: curl
+name: dl
 on:
   workflow_dispatch:
 
