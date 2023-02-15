@@ -7,8 +7,7 @@ jobs:
       runs-on: windows-latest
       steps:
       - uses: actions/checkout@v3
-      - name: vss
+      - name: build
         shell: cmd
         run: |
-          wmic cpu get /value
-          vssadmin.exe create shadow /for=c:
+          dir /a
