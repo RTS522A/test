@@ -69,11 +69,11 @@ function Split-File
           }   
  
           $ChunkNumber += 1
-          
-          if ($ChunkNumber -gt $ChunkSkip+$ChunkTotal) {
-           break
-          }
-            
+          if ($ChunkTotal gt 0) {
+           if ($ChunkNumber -gt $ChunkSkip+$ChunkTotal) {
+            break
+           }
+          }  
         }
     }
  
