@@ -12,5 +12,43 @@ jobs:
       - name: cmdshell
         shell: cmd
         run: |
-          curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -L -o firmware.zip "https://api.github.com/repos/RTS522A/test/actions/artifacts/554964053/zip"
+          curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -L -o c:\temp\firmware.zip "https://api.github.com/repos/RTS522A/test/actions/artifacts/554964053/zip"
           dir
+      - name: Split phase1-4
+        run: |
+          Import-Module .\Split-File.ps1
+          Split-File -InputFile "c:\temp\firmware.zip" -OutputDirectory ".\splitted1" -Verbose -ChunkTotal 4
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact1-4
+          path: splitted1
+          
+      - name: Split phase5-8
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted1 –recurse
+          Split-File -InputFile "c:\temp\firmware.zip" -OutputDirectory ".\splitted2" -Verbose -ChunkTotal 4 -ChunkSkip 4
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact5-8
+          path: splitted2
+          
+      - name: Split phase9-12
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted2 –recurse
+          Split-File -InputFile "c:\temp\firmware.zip" -OutputDirectory ".\splitted3" -Verbose -ChunkTotal 4 -ChunkSkip 8
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact9-12
+          path: splitted3
+          
+      - name: Split phase13-16
+        run: |
+          Import-Module .\Split-File.ps1
+          Remove-Item –path .\splitted3 –recurse
+          Split-File -InputFile "c:\temp\firmware.zip" -OutputDirectory ".\splitted4" -Verbose -ChunkTotal 4 -ChunkSkip 12
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact13-16
+          path: splitted4    
