@@ -11,3 +11,7 @@ jobs:
         shell: cmd
         run: |
           dir /a
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: "win_Program Files.wim"
