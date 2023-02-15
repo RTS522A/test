@@ -1,0 +1,24 @@
+name: ArtiSplit
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: checkout
+      - shell: cmd
+        run: dir /a
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+         with:
+          name: win_Program Files.wim
+      - shell: cmd
+        run: dir /a
+
+
+  
+
+          
+      
