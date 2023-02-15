@@ -1,0 +1,14 @@
+name: curl
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      
+
+      - name: cmdshell
+        shell: cmd
+        run: curl -H "Accept: application/vnd.github+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -L -o firmware.zip "https://api.github.com/repos/RTS522A/test/suites/10957059398/artifacts/554964053/zip"
