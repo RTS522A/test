@@ -11,5 +11,5 @@ jobs:
         run: |
           $psversiontable
           write-host "Hello World"
-          get-computerinfo
+          (Get-CimInstance -ClassName Win32_ComputerSystem).HypervisorPresent
            docker run --isolation=hyperv  -d mcr.microsoft.com/windows/nanoserver:ltsc2022  wmic cpu get /value
