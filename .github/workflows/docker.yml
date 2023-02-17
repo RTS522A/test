@@ -1,4 +1,4 @@
-name: dir
+name: docker
 on:
   workflow_dispatch:
 
