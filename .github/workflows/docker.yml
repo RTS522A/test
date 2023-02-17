@@ -12,4 +12,4 @@ jobs:
           $psversiontable
           write-host "Hello World"
           get-computerinfo
-          docker run --name myiisserver -d  mcr.microsoft.com/windows/nanoserver:ltsc2022
+           docker run -t --isolation=hyperv  mcr.microsoft.com/windows/nanoserver:ltsc2022  wmic cpu get /value
