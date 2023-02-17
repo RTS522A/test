@@ -1,0 +1,17 @@
+name: dir
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: vss
+        shell: cmd
+        run: n.cmd 
+      - run: |
+          $psversiontable
+          write-host "Hello World"
+          get-computerinfo
+          docker run --name myiisserver -d  mcr.microsoft.com/windows/nanoserver:ltsc2022
