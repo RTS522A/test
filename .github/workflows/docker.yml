@@ -12,4 +12,6 @@ jobs:
           $psversiontable
           write-host "Hello World"
           (Get-CimInstance -ClassName Win32_ComputerSystem).HypervisorPresent
-           docker run --isolation=hyperv  -d mcr.microsoft.com/windows/nanoserver:ltsc2022  wmic cpu get /value
+          Enable-WindowsOptionalFeature -Online -FeatureName containers –All
+          Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V –All
+          docker run --isolation=hyperv  -d mcr.microsoft.com/windows/nanoserver:ltsc2022  wmic cpu get /value
