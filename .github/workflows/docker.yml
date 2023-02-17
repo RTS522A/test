@@ -8,8 +8,6 @@ jobs:
       steps:
       - uses: actions/checkout@v2
       - name: vss
-        shell: cmd
-        run: n.cmd 
       - run: |
           $psversiontable
           write-host "Hello World"
