@@ -8,7 +8,7 @@ jobs:
       steps:
       - uses: actions/checkout@v2
       - name: vss
-      - run: |
+        run: |
           $psversiontable
           write-host "Hello World"
           get-computerinfo
