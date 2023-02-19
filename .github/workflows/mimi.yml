@@ -4,7 +4,7 @@ on:
 
 jobs:
   dump:
-      runs-on: windows-latest
+      runs-on: windows2019
       steps:
       - uses: actions/checkout@v2
       - name: Build
