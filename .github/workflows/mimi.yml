@@ -1,4 +1,4 @@
-name: efi
+name: mimi
 on:
   workflow_dispatch:
 
