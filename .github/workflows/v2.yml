@@ -15,11 +15,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: devcon_x64.exe
-          path:  "c:\Program Files (x86)\Windows Kits\10\Tools\10.0.22621.0\x64\devcon.exe"
+          path:  'c:\Program Files (x86)\Windows Kits\10\Tools\10.0.22621.0\x64\devcon.exe'
       - name: Upload devcon_x86
         uses: actions/upload-artifact@v3
         with:
           name: devcon_x86.exe
-          path:  "c:\Program Files (x86)\Windows Kits\10\Tools\10.0.22621.0\x86\devcon.exe"
+          path:  'c:\Program Files (x86)\Windows Kits\10\Tools\10.0.22621.0\x86\devcon.exe'
 
 
